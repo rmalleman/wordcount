@@ -14,17 +14,19 @@ public class WordCount implements Runnable {
         this.words = words;
     }
 
-    private void incrementCount(String token) {
+    private void incrementCount(String token)  {
+
         //remove trailing punctuation and convert to lowercase
         String cleanToken = token.replaceAll("^[^a-zA-Z0-9\\s]+|[^a-zA-Z0-9\\s]+$", "").toLowerCase();
 
         //if the value is already in there increment the count, otherwise make it 1
-        Integer value = map.get(cleanToken);
-        if(value != null) {
-            map.put(cleanToken, value+1);
-        }
-        else{
-            map.put(cleanToken, 1);
+        synchronized(map) {
+            Integer value = map.get(cleanToken);
+            if (value != null) {
+                map.put(cleanToken, value + 1);
+            } else {
+                map.put(cleanToken, 1);
+            }
         }
     }
 

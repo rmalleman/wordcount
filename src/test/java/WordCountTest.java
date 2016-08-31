@@ -16,6 +16,10 @@ public class WordCountTest extends TestCase {
     ExecutorService executor;
 
     protected void setUp(){
+
+    }
+
+    public void testCount() {
         input = "This is only a test. A *very* short test!";
         map = new ConcurrentHashMap<String, Integer>();
         expected_map = new ConcurrentHashMap<String, Integer>();
@@ -34,10 +38,6 @@ public class WordCountTest extends TestCase {
 
         }
         assertEquals(map, expected_map);
-    }
-
-    public void testCount() {
-
     }
 
 }
